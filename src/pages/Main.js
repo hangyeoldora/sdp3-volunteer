@@ -32,7 +32,7 @@ const Main = () => {
     if(!authState.status){
       navigate('/login');
     } else {
-      axios.get("http://localhost:3001/posts",
+      axios.get("https://allergy-check-app.herokuapp.com/posts",
       // 157
       { headers: { accessToken: localStorage.getItem("accessToken") } }).then((response) => {
         // console.log(response.data);
@@ -83,7 +83,7 @@ const Main = () => {
   const likeAPost = (postId) => {
     axios
       .post(
-        "http://localhost:3001/likes",
+        "https://allergy-check-app.herokuapp.com/likes",
         { PostId: postId },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )

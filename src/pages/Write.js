@@ -32,7 +32,7 @@ const Write = () => {
 
   // 165 이후
   const onSubmit = (data) =>{
-    axios.post('http://localhost:3001/posts', data, {
+    axios.post('https://allergy-check-app.herokuapp.com/posts', data, {
         headers: {accessToken: localStorage.getItem("accessToken")}
     }).then((response)=>{
       navigate('/');

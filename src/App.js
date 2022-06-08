@@ -24,7 +24,7 @@ const App = () => {
   // 113, 115 로그인 상태 확인하고 재렌더링 없이 요소 등장 유무 체크
   useEffect(() => {
     axios
-      .get("http://localhost:3001/auth/checkUser", {
+      .get("https://allergy-check-app.herokuapp.com/auth/checkUser", {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
