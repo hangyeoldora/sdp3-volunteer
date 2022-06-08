@@ -70,13 +70,15 @@ const App = () => {
                       <>
                         <Link to="/">Home</Link>
                         <Link to="/write">글쓰기</Link>
+                        <a className="username">{authState.username}</a>
+                      {authState.status && <a onClick={logout}>로그아웃</a>}
                       </>
                     )} 
                     {/* 123 */}
-                    <div className="loggedInContainer">
-                      {/* 119 */}
+                    <div className="loggedInInfo">
+                      {/* 119
                       <h1>{authState.username}</h1>
-                      {authState.status && <button onClick={logout}>로그아웃</button>}
+                      {authState.status && <a onClick={logout}>로그아웃</a>} */}
                     </div>
                   </div>
                 </div>

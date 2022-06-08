@@ -61,9 +61,17 @@ header{
   justify-content: flex-end;
   align-items: center;
 }
+#gnb .links a{
+  margin: 0 auto;
+  cursor: pointer;
+}
+#gnb .links a.username{
+  font-weight: 700;
+}
 #gnb .links a:not(:last-child){
   margin-right: 20px;
 }
+
 
 /* mainWrap start */
 .postWrap{
