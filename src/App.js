@@ -1,25 +1,101 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable */
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Navbar, Nav, NavDrop } from "react-bootstrap";
+import axios from "axios";
+import Main from "./pages/Main";
+import Post from "./pages/Post";
+import Write from "./pages/Write";
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
+import Page404 from "./pages/Page404";
 
-function App() {
+// 107
+import { AuthContext } from "./helpers/AuthContext";
+
+const App = () => {
+  const [authState, setAuthState] = useState({
+    username: "",
+    id: 0,
+    status: false,
+  });
+  
+  // 113, 115 로그인 상태 확인하고 재렌더링 없이 요소 등장 유무 체크
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/auth/checkUser", {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          setAuthState({ ...authState, status: false });
+        } else {
+          setAuthState({
+            username: response.data.username,
+            id: response.data.id,
+            status: true,
+          });
+        }
+      });
+  }, []);
+
+  // 118 - 로그아웃
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    setAuthState({ username: "", id: 0, status: false });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="wrap">
+        <AuthContext.Provider value={{ authState, setAuthState }}>
+          <Router>
+            <header>
+              <div className="navbar">
+                <div id="gnb">
+                  <Link to="/"><img
+                    className="nav_logo"
+                    src={process.env.PUBLIC_URL + "/logo/dongseo_logo.png"}
+                  /></Link>
+                  
+                  <div className="links">
+                    {!authState.status ? (
+                      <>
+                        <Link to="/login">로그인</Link>
+                        <Link to="/registration">회원가입</Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link to="/">Home</Link>
+                        <Link to="/write">글쓰기</Link>
+                      </>
+                    )} 
+                    {/* 123 */}
+                    <div className="loggedInContainer">
+                      {/* 119 */}
+                      <h1>{authState.username}</h1>
+                      {authState.status && <button onClick={logout}>로그아웃</button>}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </header>
+            <Routes>
+              <Route path="/" exact element={<Main />} />
+              <Route path="/post/:id" exact element={<Post />} />
+              <Route path="/write" exact element={<Write />} />
+              <Route path="/login" exact element={<Login />} />
+              <Route path="/registration" exact element={<Registration />} />
+              <Route path="*" exact element={<Page404 />} />
+            </Routes>
+          </Router>
+        </AuthContext.Provider>
+      </div>
     </div>
   );
-}
+};
 
 export default App;

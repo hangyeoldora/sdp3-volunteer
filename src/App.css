@@ -1,38 +1,225 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+html{
+  background-color: #fff;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body{
+  width: 100%;
+  height: 100%;
+}
+a{
+  text-decoration: none;
+  color: #333;
+}
+li{
+  list-style: none;
+}
+.wrap{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.inner{
+  max-width: 1920px;
+  margin:0 auto;
+}
+header{
+  width: 100%;
+  border-bottom: 1px solid #999;
+}
+.navbar{
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+#gnb{
+  width: 100%;
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    transition: padding .3s;
+    -webkit-transition: padding .3s;
+    -moz-transition: padding .3s;
+    position: relative;
+}
+#gnb .nav_logo{
+  width: 150px;
+  height: auto;
+}
+#gnb .links {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+#gnb .links a:not(:last-child){
+  margin-right: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* mainWrap start */
+.postWrap{
+
+}
+.postWrap li{
+  display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: solid 1px #cecece;
+    padding: 29px 70px 29px 20px;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-position: right 78px center;
+}
+.postWrap li .title{
+  font-size: 1.3em;
+    margin-right: 30px;
+    line-height: 1.5;
+    flex: 0 0 10%;
+    font-family: 'Noto Sans', sans-serif;
+}
+.postWrap li .content{
+  flex: 0 1 60%;
+  font-size: 1.2em;
+  line-height: 1.38em;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.postWrap li .username{
+  flex: 0 0 55px;
+  width: 55px;
+  height: 22px;
+  line-height: 22px;
+  margin-right: 30px;
+  font-size: 1.2em;
+  text-align: center;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+/* mainWrap end */
+
+
+
+/* write page start */
+.writePage{
+  width: 100%;
+  height: 100%;
+  margin-top: 100px;
+}
+.writePage .formContainer{
+  width: 50%;
+  height: 400px;
   display: flex;
   flex-direction: column;
+ 
+  margin:-0 auto;
+  border-top: 1px solid #777;
+  border-bottom: 1px solid #777;
+  padding: 20px 0;
+}
+.writePage .formContainer .formContent{
+  height: 33%;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.writePage .formContainer label{
+  font-size: 15px;
+  flex: 20%;
+}
+.writePage .formContainer input{
+  flex:80%;
+  height: 50px;
+}
+.writePage .formContainer span{
+  color: red;
+  font-weight: 700;
+}
+
+.writePage .formContainer button{
+  width: 150px;
+  height: 50px;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: lightskyblue;
+  border-radius: 8px;
+  border: none;
   color: white;
 }
+.writePage .formContainer button:hover{
+  cursor: pointer;
+  background-color: dodgerblue;
+}
+/* write page end */
 
-.App-link {
-  color: #61dafb;
+
+/* post page start */
+.detailPage{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  margin-top: 50px;
+  padding: 20px;
+}
+.detailPage h1{
+  text-align: left;
+  margin-bottom: 30px;
+}
+.detailPage .detail-container{
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  height: 70vh;
+  padding: 20px;
+}
+.detailPage .detail-container .userInfo{
+  width: 100%;
+  padding-bottom: 20px;
+  text-align: left;
+  border-bottom: 1px solid #999;
+}
+.detailPage .detail-container .userInfo .detail-username{
+  font-size: 1.4em;
+}
+.detailPage .detail-container .userInfo .detail-datetime{
+  font-size: 1.1em;
+  color: #999;
+}
+.detailPage .detail-container .detail-contentWrap{
+  width: 100%;
+  padding: 20px 0;
+  text-align: left;
+}
+.detailPage .detail-container .detail-contentWrap .detail-id{
+  font-size: 1.5em;
+  color: #888;
+  margin-bottom: 0 !important;
+}
+.detailPage .detail-container .detail-contentWrap .detail-title{
+  font-size: 2em;
+  color: #000;
+}
+.detailPage .detail-container .detail-contentWrap .detail-content{
+  margin-top: 30px;
+  font-size: 1.4em;
+  font-weight: 300;
+}
+.detailPage .detail-commentWrap{
+  margin-top: 50px;
+  width: 100%;
+  padding: 20px;
+  background-color: #f8f8f8;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* post page end */
