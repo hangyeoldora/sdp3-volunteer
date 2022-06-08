@@ -117,48 +117,70 @@ const Main = () => {
 
   return (
     <div>
-      <ul className="postWrap">
-        {listOfPosts.map((value, key) => {
-          return (
-            <div key={key}>
-              <li>
-                <div className="title" onClick={() => {
-                    navigate(`/post/${value.id}`);
-                  }}>{value.title}
+      <div className="searchWrap">
+        <div className="inner">
+          <p className="main-title">Search</p>
+            <section className="apiSearchWrap">
+              <div className="apiLeftSide">
+                <img className="apiSearchImg" src={process.env.PUBLIC_URL + "/banner/apiSearch.jpg"} />
+                <div className="searchContainer">
+                  <p>Search<br /> Now!</p>
+                  <div className="apiSearchContent">
+                    <label>제품명</label>
+                    <input type="text" onChange={(e)=>{
+                          setInputItem(e.target.value);
+                      }} placeholder=" 제품명을 입력하세요."/>
+                  </div>
+                  <a className="apiSearchBtn" onClick={getFoodsItem}>Search</a>
                 </div>
-                <div
-                  className="content"
-                  onClick={() => {
-                    navigate(`/post/${value.id}`);
-                  }}
-                >
-                  {value.postContent}
+              </div>
+              <div className="apiRightSide">
+                {
+                  apiCheck == true ? <ApiFoodsData apiData={apiData} allergyList={allergyList} allegyData={allegyData} /> : <ApiNullData />
+                }
+              </div>
+            </section>
+        </div>
+      </div>
+      <div className="postWrap">
+        <div className="inner postContainer">
+          <p className="main-title">게시글</p>
+          <ul>
+            {listOfPosts.map((value, key) => {
+              return (
+                <div key={key}>
+                  <li>
+                    <div className="title" onClick={() => {
+                        navigate(`/post/${value.id}`);
+                      }}>{value.title}
+                    </div>
+                    <div
+                      className="content"
+                      onClick={() => {
+                        navigate(`/post/${value.id}`);
+                      }}
+                    >
+                      {value.postContent}
+                    </div>
+                    <div className="username">{value.username}</div>
+                    <div className="buttons">
+                      {/* 152 */}
+                      <ThumbUpIcon onClick={() => {
+                        likeAPost(value.id);
+                      }} 
+                      // likedPosts array에 존재하는지
+                        className={likedPosts.includes(value.id) ? "unlikeBttn" : "likeBttn"} 
+                      />
+                      {/* 145  */}
+                      <label>{value.Likes.length}</label>
+                    </div>
+                  </li>
                 </div>
-                <div className="username">{value.username}</div>
-                <div className="buttons">
-                  {/* 152 */}
-                  <ThumbUpIcon onClick={() => {
-                    likeAPost(value.id);
-                  }} 
-                  // likedPosts array에 존재하는지
-                    className={likedPosts.includes(value.id) ? "unlikeBttn" : "likeBttn"} 
-                  />
-                  {/* 145  */}
-                  <label>{value.Likes.length}</label>
-                </div>
-              </li>
-            </div>
-          );
-        })}
-      </ul>
-      <label>검색:</label>
-      <input type="text" onChange={(e)=>{
-            setInputItem(e.target.value);
-        }}/>
-      <button onClick={getFoodsItem}>click</button>
-      {
-        apiCheck == true ? <ApiFoodsData apiData={apiData} allergyList={allergyList} allegyData={allegyData} /> : null
-      }
+              );
+            })}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };
@@ -166,24 +188,37 @@ const Main = () => {
 const ApiFoodsData = (props) => {
   return (
     <>
-      {
-        props.apiData.map((value, key) => {
-        console.log(props.allergyList[key]);
-
-          return(
-            <div key={key}>
-              {/* {console.log(value[key].RAWMTRL_NM)} */}
-              <h1>품목명: {value.PRDLST_NM}</h1>
-              <h3>유형: {value.PRDLST_DCNM	}</h3>
-              <h3>원재료: {value.RAWMTRL_NM}</h3>
-            </div>
-          )
-          
-        })
-      }
-      
+      <ul className="apiFoodsTable">
+        {
+          props.apiData.map((value, key) => {
+            return(
+              <div key={key}>
+                <li>
+                  <p className="apiFoodsId">{key}</p>
+                  <p className="apiFoodsName">품목명:<br/>{value.PRDLST_NM}</p>
+                  <div className="apiFoodsRawInfo">
+                    <p className="apiFoodsDcnm">유형: {value.PRDLST_DCNM	}</p>
+                    <p className="apiFoodsRawName">원재료: {value.RAWMTRL_NM}</p>
+                  </div>
+                  </li>
+                  {/* console.log(props.allergyList[key]); */}
+                  {/* {console.log(value[key].RAWMTRL_NM)} */}
+              </div>
+            )
+            
+          })
+        }
+      </ul>
     </>
   )
+};
+
+const ApiNullData = () => {
+  return(
+    <>
+      <p>null</p>
+    </>
+  );
 }
 
 export default Main;
