@@ -4,6 +4,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import axios from "axios";
 import Main from "./pages/Main";
+import Banner from "./component/Banner";
 import Post from "./pages/Post";
 import Write from "./pages/Write";
 import Login from "./pages/Login";
@@ -52,7 +53,11 @@ const App = () => {
       <div className="wrap">
         <AuthContext.Provider value={{ authState, setAuthState }}>
           <Router>
-            <header>
+           
+            <Routes>
+              <Route path="/" exact element={
+                <>
+                 <header>
               <div className="navbar">
                 <div id="gnb">
                   <Link to="/"><img
@@ -83,11 +88,85 @@ const App = () => {
                   </div>
                 </div>
               </div>
-            </header>
-            <Routes>
-              <Route path="/" exact element={<Main />} />
-              <Route path="/post/:id" exact element={<Post />} />
-              <Route path="/write" exact element={<Write />} />
+                  </header>
+                  <Banner />
+                  <Main />
+                </>
+              } />
+              <Route path="/post/:id" exact element={
+                <>
+                  <header>
+                <div className="navbar">
+                  <div id="gnb">
+                    <Link to="/"><img
+                      className="nav_logo"
+                      src={process.env.PUBLIC_URL + "/logo/dongseo_logo.png"}
+                    /></Link>
+                    
+                    <div className="links">
+                      {!authState.status ? (
+                        <>
+                          <Link to="/login">로그인</Link>
+                          <Link to="/registration">회원가입</Link>
+                        </>
+                      ) : (
+                        <>
+                          <Link to="/">Home</Link>
+                          <Link to="/write">글쓰기</Link>
+                          <a className="username">{authState.username}</a>
+                        {authState.status && <a onClick={logout}>로그아웃</a>}
+                        </>
+                      )} 
+                      {/* 123 */}
+                      <div className="loggedInInfo">
+                        {/* 119
+                        <h1>{authState.username}</h1>
+                        {authState.status && <a onClick={logout}>로그아웃</a>} */}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  </header>
+                  <Post />
+                </>
+              } />
+              <Route path="/write" exact element={
+                <>
+                  <header>
+                <div className="navbar">
+                  <div id="gnb">
+                    <Link to="/"><img
+                      className="nav_logo"
+                      src={process.env.PUBLIC_URL + "/logo/dongseo_logo.png"}
+                    /></Link>
+                    
+                    <div className="links">
+                      {!authState.status ? (
+                        <>
+                          <Link to="/login">로그인</Link>
+                          <Link to="/registration">회원가입</Link>
+                        </>
+                      ) : (
+                        <>
+                          <Link to="/">Home</Link>
+                          <Link to="/write">글쓰기</Link>
+                          <a className="username">{authState.username}</a>
+                        {authState.status && <a onClick={logout}>로그아웃</a>}
+                        </>
+                      )} 
+                      {/* 123 */}
+                      <div className="loggedInInfo">
+                        {/* 119
+                        <h1>{authState.username}</h1>
+                        {authState.status && <a onClick={logout}>로그아웃</a>} */}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  </header>
+                  <Write />
+                </>
+              } />
               <Route path="/login" exact element={<Login />} />
               <Route path="/registration" exact element={<Registration />} />
               <Route path="*" exact element={<Page404 />} />
