@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+/* eslint-disable */
+import React, { useState, useContext, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -7,19 +8,16 @@ import { AuthContext } from '../helpers/AuthContext';
 
 const Write = () => {
   // form 초기값 설정
-  //163
   const { authState } = useContext(AuthContext);
   const initialValues ={
       title: "",
       postText: "",
-      // 165
       // username:"",
   }
   let navigate = useNavigate();
 
-  // 163
   useEffect(()=>{
-    if(!authState.status) {
+    if(!localStorage.getItem("accessToken")) {
       navigate('/login');
     }
   }, []);
@@ -32,7 +30,7 @@ const Write = () => {
 
   // 165 이후
   const onSubmit = (data) =>{
-    axios.post('https://allergy-check-app.herokuapp.com/posts', data, {
+    axios.post('https://sdp3-application.herokuapp.com/posts', data, {
         headers: {accessToken: localStorage.getItem("accessToken")}
     }).then((response)=>{
       navigate('/');
@@ -49,7 +47,7 @@ const Write = () => {
       >
         <Form className="formContainer">
           <div className="formContent">
-            <label>Title:</label>
+            <label>제목 :</label>
             <Field
               autoComplete="off"
               id="inputWritePost"
@@ -60,7 +58,7 @@ const Write = () => {
           <ErrorMessage name="title" component="span" />
 
           <div className="formContent">
-            <label>postContent:</label>
+            <label>내용 :</label>
             <Field
               autoComplete="off"
               id="inputWritePost"

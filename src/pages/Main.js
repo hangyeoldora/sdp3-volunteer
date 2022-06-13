@@ -6,8 +6,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { AuthContext } from '../helpers/AuthContext';
 
 const Main = () => {
-  // const [listOfPosts, setlistOfPosts] = useState([]);
-
+  let navigate = useNavigate();
 
   const [listOfPosts, setListOfPosts] = useState([]);
   // 158
@@ -16,7 +15,6 @@ const Main = () => {
   const { authState } = useContext(AuthContext);
 
   // data api
-  
   const [apiData, setApiData] = useState([]);
   const [apiCheck, setApiCheck] = useState(false);
   const [inputItem, setInputItem] = useState("");
@@ -25,48 +23,25 @@ const Main = () => {
   const [allegyData, setAllegyData] = useState([]);
   const allergyList = ['복숭아', '토마토', '홍합','밀가루','오징어','전복', '새우', '굴', '게', '고등어', '조개류', '땅콩', '메밀', '밀', '대두', '호두', '땅콩', '난류', '가금류', '우유', '쇠고기', '돼지고기', '닭고기'];
 
-  let navigate = useNavigate();
-
   useEffect(() => {
-    // 163, 로그인 했는지 체크
-    if(!authState.status){
+    // 로그인 했는지 체크
+    if(!localStorage.getItem("accessToken")){
       navigate('/login');
     } else {
-      axios.get("https://allergy-check-app.herokuapp.com/posts",
-      // 157
+      axios.get("https://sdp3-application.herokuapp.com/posts",
       { headers: { accessToken: localStorage.getItem("accessToken") } }).then((response) => {
         // console.log(response.data);
         // likedPosts가 추가되어 obj이기 때문에 listOfPosts 추가
         setListOfPosts(response.data.listOfPosts);
-        // 158, 모든 id 목록 개별적으로 가짐
+        // 모든 id 목록 개별적으로 가짐
         setLikedPosts(response.data.likedPosts.map((like)=>{return like.PostId}));
       });
     }
-    // 식품안전나라 test
-    // axios.get(
-    //   `http://openapi.foodsafetykorea.go.kr/api/sample/C002/json/1/10`).then((response)=>{
-    //     console.log(response.data);
-    //   })
+
   }, []);
 
-  
-  // const getFoodsItem = () => {
-  //   searchItem = inputItem;
-  //   axios.get(`http://localhost:3001/api/byId/${searchItem}`).then((response) => {
-      
-  //   let foodsArray = [...apiData, response.data.C002.row];
-  //     setApiData(foodsArray);
-  //     setApiCheck(true);
-  //     console.log(response.data);
-  //   });
-  //   // .catch((error)=>{
-  //   //   console.log(error);
-  //   // });
-    
-  // }
-
   const getFoodsItem = () => {
-    axios.get(`https://openapi.foodsafetykorea.go.kr/api/7bb345a5cae7405fb10f/C002/json/1/10/PRDLST_NM=${inputItem}`).then((response) => {
+    axios.get(`${process.env.REACT_APP_API_URL_KEY}/C002/json/1/10/PRDLST_NM=${inputItem}`).then((response) => {
       
     let foodsArray = [...apiData, response.data.C002.row];
       setApiData(foodsArray[0]);
@@ -83,7 +58,7 @@ const Main = () => {
   const likeAPost = (postId) => {
     axios
       .post(
-        "https://allergy-check-app.herokuapp.com/likes",
+        "https://sdp3-application.herokuapp.com/likes",
         { PostId: postId },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       )
@@ -117,7 +92,7 @@ const Main = () => {
 
   return (
     <div>
-      <div className="searchWrap">
+      {/* <div className="searchWrap">
         <div className="inner">
           <p className="main-title">Search</p>
             <section className="apiSearchWrap">
@@ -141,7 +116,7 @@ const Main = () => {
               </div>
             </section>
         </div>
-      </div>
+      </div> */}
       <div className="postWrap">
         <div className="inner postContainer">
           <p className="main-title">게시글</p>

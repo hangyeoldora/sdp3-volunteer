@@ -14,7 +14,7 @@ const Login = () => {
 
     const login = () => {
         const data = {username: username, password: password};
-        axios.post("https://allergy-check-app.herokuapp.com/auth/login", data).then((response)=>{
+        axios.post("https://sdp3-application.herokuapp.com/auth/login", data).then((response)=>{
             if(response.data.error){
                 alert(response.data.error);
             } else {

@@ -260,6 +260,8 @@ header{
   background-color: #000;
   color: #fff;
   font-size: 1.3em;
+  display: block;
+  cursor: pointer;
 }
 .apiSearchWrap .apiRightSide{
   overflow-y: scroll;
@@ -408,3 +410,183 @@ header{
 }
 
 /* post page end */
+
+
+/* maps section start */
+.maps-wrap{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.maps-container{
+  display: flex;
+  justify-content: space-between;
+}
+.maps-wrap .maps-container .maps-left-container{
+  flex: 30%;
+  border: 1px solid #000;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.maps-wrap .maps-container .maps-left-container p{
+  font-size: 3em;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 20px;
+}
+.maps-wrap .maps-container .maps-left-container input{
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid lightsalmon;
+
+}
+.maps-wrap .maps-container .maps-left-container a{
+  border:1px solid #777;
+  margin-top: 20px;
+  padding:0 20px;
+  display: block;
+  line-height: 40px;
+  border-radius: 8px;
+  text-align: center;
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+}
+.maps-wrap .maps-container .maps-right-container{
+  flex: 70%;
+  width: 100%;
+}
+/* maps section end */
+
+/* search start */
+.vol-center-main-title{
+  text-align: left;
+  font-size: 2.4em;
+  padding-left:20px;
+  border-left: 7px solid black;
+  margin-top: 100px;
+}
+.vol-center-wrap{
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+.vol-left-container{
+  flex: 40%;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+.vol-left-container .vol-center-searchBox{
+  border:1px solid #000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.vol-right-contaier{
+  flex: 60%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.vol-right-inner{
+  display: flex;
+}
+.vol-right-inner p{
+  width: 100%;
+}
+.vol-right-inner p:first-child{
+  display: none;
+}
+/* search end */
+.gm-style-iw-d {
+  overflow: hidden !important;
+}
+.gm-style .gm-style-iw-t::after{
+  display: none;
+}
+.gm-style-iw-d div{
+  padding: 15px;
+}
+.gm-style-iw-d div p{
+  margin: 0 !important;
+}
+.gm-style .gm-style-iw-c{
+  padding:0 !important;
+}
+
+/* footer start */
+.footer {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+  height: 100%;
+  padding: 0 10px;
+  border-top: 1px solid black;
+  z-index: 1;
+  margin-top: 50px;
+  padding-top: 20px;
+}
+
+.ft-wrap {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.ft-wrap:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.ft-wrap:last-child {
+  padding-bottom: 20px;
+}
+
+.ft-wrap p {
+  margin-bottom: 5px;
+}
+
+.ft-sns-wrap p {
+  text-align: left;
+}
+.ft-nav{
+  padding:0;
+  margin:0;
+  display: flex;
+}
+.ft-nav li{
+  font-weight: 500;
+  height: 100%;
+}
+.ft-nav li:not(:last-child){
+  margin-right: 25px;
+}
+.ft-nav li::after{
+  float:right;
+  content:'|';
+  display: block;
+  margin-left: 25px;
+}
+.ft-nav li:last-child::after{
+  content :"";
+}
+.ft-menu-wrap p{
+  text-transform: uppercase;
+  text-align: right;
+  font-weight: 700;
+}
+/* footer end */
+
+@media screen and (max-width:767px){
+  header .navbar #gnb .links {
+    display: none;
+  }
+}
