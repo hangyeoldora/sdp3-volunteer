@@ -1,9 +1,10 @@
 /* eslint-disable */
 import React, { useState, useEffect, useRef } from "react";
 import { GoogleMap, InfoWindow, Marker, useJsApiLoader, Autocomplete  } from "@react-google-maps/api";
-import BusanDB from "../db/busan/sasang";
+import BusanDB from "../db/busan/busan";
 import DaeguDB from "../db/daegu/daegu";
-import sejongDB from "../db/sejong/sejong";
+import SejongDB from "../db/sejong/sejong";
+import SeoulDB from "../db/seoul/seoul"
 import cloneDeep from 'lodash/cloneDeep';
 
 const Maps = () => {
@@ -71,11 +72,6 @@ const Maps = () => {
         // console.log(marker, index)
     }
 
-    // const matchingDB = (data) => {
-    //   if(data=="부산"){
-        
-    //   }
-    // }
     // input 값에 맞는 DB 가져오는 함수
     const getMatchDB = () => {
       // 기본 좌표 초기화
@@ -93,17 +89,28 @@ const Maps = () => {
         DB=cloneDeep(BusanDB);
       } else if (searchBox=="대구"){
         DB=cloneDeep(DaeguDB);
+      } else if (searchBox=="세종") {
+        DB=cloneDeep(SeoulDB);
       } else {
-        DB=cloneDeep(sejongDB);
+        DB=cloneDeep(BusanDB);
       }
-      setMapCenter({lat: parseFloat(DB[2].lat), lng: parseFloat(DB[2].lng)});
+      if(searchBox=="세종"){
+        setMapCenter({lat: parseFloat(DB[10].lat), lng: parseFloat(DB[10].lng)});
+      } else if (searchBox=="부산") {
+        setMapCenter({lat: parseFloat(DB[1].lat), lng: parseFloat(DB[1].lng)});
+      } else if (searchBox=="서울") {
+        setMapCenter({lat: parseFloat(DB[3].lat), lng: parseFloat(DB[3].lng)});
+      } else {
+        setMapCenter({lat: parseFloat(DB[2].lat), lng: parseFloat(DB[2].lng)});
+      }
+
       for(let i = 0; i<DB.length; i++){        
         const marker = {
           position: {
             lat: parseFloat(DB[i].lat),
             lng: parseFloat(DB[i].lng)
           },
-          // label: { color: "white", text: "P4" },
+          // label: { color: "white", text: "testing" },
           text: DB[i].모집기관,
           date: DB[i].봉사기간,
           draggable: false
@@ -132,7 +139,7 @@ const Maps = () => {
                 <GoogleMap 
                     mapContainerStyle={containerStyle} 
                     center={mapCenter} 
-                    zoom={12}
+                    zoom={13}
                     onClick={mapClicked}
                     options={{
                       zoomControl: false,
