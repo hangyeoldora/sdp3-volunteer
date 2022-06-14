@@ -90,8 +90,10 @@ const Maps = () => {
       } else if (searchBox=="대구"){
         DB=cloneDeep(DaeguDB);
       } else if (searchBox=="세종") {
+        DB=cloneDeep(SejongDB);
+      } else if (searchBox=="서울"){
         DB=cloneDeep(SeoulDB);
-      } else {
+      } else{
         DB=cloneDeep(BusanDB);
       }
       if(searchBox=="세종"){
