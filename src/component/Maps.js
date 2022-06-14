@@ -115,6 +115,7 @@ const Maps = () => {
           // label: { color: "white", text: "testing" },
           text: DB[i].모집기관,
           date: DB[i].봉사기간,
+          title: DB[i].제목,
           draggable: false
       }
       allMarkers.push(marker);
@@ -157,6 +158,7 @@ const Maps = () => {
                             position={marker.position}
                             // label={marker.label}
                             text={marker.text}
+                            title={marker.title}
                             address={marker.address}
                             date={marker.date}
                             draggable={marker.draggable}
@@ -167,11 +169,11 @@ const Maps = () => {
                                 (activeInfoWindow === index)
                                 &&
                                 <InfoWindow position={marker.position}>
-                                    <div>
-                                      <h3>봉사모집공고</h3>
-                                      <p>{marker.text}</p>
-                                      <p>{marker.address}</p>
-                                      <p>{marker.date}</p>
+                                    <div className="marker-container">
+                                      <h4>봉사모집공고</h4>
+                                      <p className="marker-tit"><b>제목 :</b> {marker.title}</p>
+                                      <p className="marker-tit"><b>모집기관 :</b> {marker.text}</p>
+                                      <p className="marker-tit"><b>봉사기간 :</b> {marker.date}</p>
                                     </div>
         
                                     {/* <b>{marker.position.lat}, {marker.position.lng},</b> */}
