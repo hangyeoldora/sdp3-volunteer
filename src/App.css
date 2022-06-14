@@ -295,6 +295,15 @@ header{
 
 /* api wrap end */
 
+/* login page start  */
+.loginPage{
+  width: 100vh;
+  height: 100vw;
+}
+.loginPage .loginContainer{
+}
+/* login page end */
+
 /* write page start */
 .writePage{
   width: 100%;
@@ -585,8 +594,17 @@ header{
 }
 /* footer end */
 
+/* mobile menu start */
+.mobile-links{
+  display: none;
+}
+/* mobile menu end */
+
 @media screen and (max-width:767px){
   header .navbar #gnb .links {
     display: none;
+  }
+  .mobile-links{
+    display: block;
   }
 }

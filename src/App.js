@@ -82,7 +82,7 @@ const App = () => {
                           )} 
                         </div>
                         <div className="mobile-links">
-                          adasdasd
+                          <MenuIcon />
                         </div>
                       </div>
                     </div>
@@ -118,12 +118,6 @@ const App = () => {
                             {authState.status && <a onClick={logout}>로그아웃</a>}
                             </>
                           )} 
-                          {/* 123 */}
-                          <div className="loggedInInfo">
-                            {/* 119
-                            <h1>{authState.username}</h1>
-                            {authState.status && <a onClick={logout}>로그아웃</a>} */}
-                          </div>
                         </div>
                       </div>
                 </div>
@@ -155,12 +149,6 @@ const App = () => {
                         {authState.status && <a onClick={logout}>로그아웃</a>}
                         </>
                       )} 
-                      {/* 123 */}
-                      <div className="loggedInInfo">
-                        {/* 119
-                        <h1>{authState.username}</h1>
-                        {authState.status && <a onClick={logout}>로그아웃</a>} */}
-                      </div>
                     </div>
                   </div>
                 </div>
