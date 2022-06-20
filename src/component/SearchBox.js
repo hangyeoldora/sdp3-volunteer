@@ -17,7 +17,7 @@ const SearchBox = () => {
     }
 
     useEffect(()=>{
-        axios.get("http://localhost:3001/volcollection").then((response)=>{
+        axios.get("https://sdp3-application.herokuapp.com/volcollection").then((response)=>{
             const dataSet = response.data;
             parserStr(dataSet);
         })
