@@ -12,7 +12,6 @@ const Write = () => {
   const initialValues ={
       title: "",
       postText: "",
-      // username:"",
   }
   let navigate = useNavigate();
 
@@ -25,10 +24,8 @@ const Write = () => {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("제목은 필수입니다."),
     postContent: Yup.string().required(),
-    // username: Yup.string().min(3).max(15).required(),
   });
 
-  // 165 이후
   const onSubmit = (data) =>{
     axios.post('https://sdp3-application.herokuapp.com/posts', data, {
         headers: {accessToken: localStorage.getItem("accessToken")}
@@ -67,17 +64,6 @@ const Write = () => {
             />
           </div>
           <ErrorMessage name="postContent" component="span" />
-
-          {/* <div className="formContent">
-            <label>Username:</label>
-            <Field
-              autoComplete="off"
-              id="inputWritePost"
-              name="username"
-              placeholder="유저명을 입력하세요."
-            />
-          </div>
-          <ErrorMessage name="username" component="span" /> */}
 
           <button type="submit">글쓰기</button>
         </Form>

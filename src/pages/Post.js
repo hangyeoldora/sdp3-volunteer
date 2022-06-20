@@ -11,7 +11,6 @@ const Post = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
-  // 132
   const { authState } = useContext(AuthContext);
 
   useEffect(() => {
@@ -30,7 +29,6 @@ const Post = () => {
       .post(
         "https://sdp3-application.herokuapp.com/comments",
         { commentBody: newComment, PostId: id },
-        //97
         {
           headers: {
             accessToken: localStorage.getItem("accessToken"),
@@ -38,13 +36,10 @@ const Post = () => {
         }
       )
       .then((response) => {
-        // 97
         if (response.data.error) {
           console.log(response.data.error);
         } else {
-          //71
           // 새로고침없이 자동으로
-          // 101 username 추가
           const commentToAdd = {
             commentBody: newComment,
             username: response.data.username,
@@ -55,7 +50,6 @@ const Post = () => {
       });
   };
 
-  // 133 comment.id를 파라미터로 받기
   const deleteComment = (id) => {
     axios.delete(`https://sdp3-application.herokuapp.com/comments/${id}`, {
       // 유효성 인증을 위해 header
@@ -87,7 +81,6 @@ const Post = () => {
         </div>
         <section className="detail-commentWrap">
           <div className="addCommentContainer">
-            {/* newComment value를 넣어 input 초기화 */}
             <input
               type="text"
               placeholder="Comments..."
@@ -107,7 +100,6 @@ const Post = () => {
                 <div key={key} className="comment">
                   {comment.commentBody}
                   <label>Username: {comment.username}</label>
-                  {/* 131 */}
                 {authState.username === comment.username && <button onClick={()=> {deleteComment(comment.id)}}>X</button>}
                 </div>
               );
